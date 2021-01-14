@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <HelloWorld propsMsg="Hello" user="user" />
 </template>
 
 <script lang="ts">
@@ -11,6 +11,20 @@ export default defineComponent({
   name: 'App',
   components: {
     HelloWorld
+  },
+  data(){
+    return{
+      person: {
+        firstName: 'John',
+        lastName: 'doe',
+        age: 30,
+      }
+    }
+  },
+  computed: {
+    user(): object {
+      return this.person
+    }
   }
 });
 </script>

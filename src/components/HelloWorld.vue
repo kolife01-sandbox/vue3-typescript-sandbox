@@ -1,43 +1,61 @@
 <template>
   <div class="hello">
+    <h1>{{ propsMsg }}</h1>
     <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript" target="_blank" rel="noopener">typescript</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <h1>{{ book.title }}/{{ book.author }}/{{ book.year }}</h1>
+    <h2>{{ getLength }}</h2>
+    <h2>{{ changeMessage() }}</h2>
+    <h2>{{ fullName }} {{ this.user.age}}</h2>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
+
+interface Book {
+  title: string;
+  author: string;
+  year: number;
+}
+
+interface User {
+  firstName: string;
+  lastName: string;
+  age: number;
+}
 
 export default defineComponent({
   name: 'HelloWorld',
+  data(){
+    return {
+      msg: "Hello TypeScript",
+      detail: "Hello TypeScript",
+      book: {
+        title: 'Vue 3 Guide',
+        author: 'Vue Team',
+        year: 2020
+      } as Book
+    }
+  },
+  computed: {
+    getLength(): number{
+      return this.msg.length;
+    },
+    fullName(): string {
+      return this.user.firstName + this.user.lastName
+    }
+  },
+  methods: {
+    changeMessage(): string{
+      return this.detail = "Hi TypeScript"
+    }
+  },
   props: {
-    msg: String,
+    propsMsg: String as PropType<string>,
+    user: {
+      type: Object as PropType<User>,
+      required: true,
+    }
   },
 });
 </script>
