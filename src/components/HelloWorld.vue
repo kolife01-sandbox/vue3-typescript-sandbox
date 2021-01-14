@@ -5,7 +5,7 @@
     <h1>{{ book.title }}/{{ book.author }}/{{ book.year }}</h1>
     <h2>{{ getLength }}</h2>
     <h2>{{ changeMessage() }}</h2>
-    <h2>{{ fullName }} {{ this.user.age}}</h2>
+    <h2>{{ fullName }} {{ user.age}}</h2>
   </div>
 </template>
 
