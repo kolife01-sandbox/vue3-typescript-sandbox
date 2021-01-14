@@ -5,7 +5,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import HelloWorld, { User } from './components/HelloWorld.vue';
 
 export default defineComponent({
   name: 'App',
@@ -18,11 +18,11 @@ export default defineComponent({
         firstName: 'John',
         lastName: 'doe',
         age: 30,
-      }
+      } as User
     }
   },
   computed: {
-    user(): object {
+    user(): User {
       return this.person
     }
   }
