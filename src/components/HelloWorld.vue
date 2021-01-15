@@ -51,7 +51,10 @@ export default defineComponent({
     }
   },
   props: {
-    propsMsg: String as PropType<string>,
+    propsMsg:{
+      type: String as PropType<string>,
+      required: true,
+    },
     user: {
       type: Object as PropType<User>,
       required: true,
